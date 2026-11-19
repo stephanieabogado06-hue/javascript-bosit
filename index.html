@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1e3a8a" />
+    <title>Click2Eat — Canteen Ordering System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="currency.js" defer></script>
+    <script src="accessibility.js" defer></script>
+    <script src="yes.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="accessibility-widget">
+        <button class="accessibility-toggle" type="button" aria-label="Open accessibility options"
+          aria-controls="accessibility-panel" aria-expanded="false">
+          <img src="neust.webp" alt="" />
+        </button>
+      </div>
+      <a class="brand" href="#" aria-label="Click2Eat home">
+        <span class="brand-logo-slot"><img src="neust.webp" alt="NEUST logo" /></span>
+        <span>Click2Eat<span class="brand-small">Canteen Ordering System</span></span>
+      </a>
+      <div class="topbar-note"><span class="open-dot"></span> Mabuhay, NEUSTians!</div>
+      <nav class="page-links" aria-label="Site pages">
+        <a class="admin-back-link" href="admin.html">Admin portal ↗</a>
+      </nav>
+    </header>
+
+    <main class="layout">
+      <section class="menu-area" aria-labelledby="welcome-title">
+        <div class="welcome">
+          <div>
+            <p class="eyebrow">WELCOME TO CLICK2EAT</p>
+            <h1 id="welcome-title">Hey there!<br /><em>What sounds good?</em></h1>
+            <p class="welcome-copy">Find a favorite, add it to your basket, and we’ll take it from here.</p>
+          </div>
+          <div class="welcome-art" aria-hidden="true"><span>☕</span><i>✦</i></div>
+        </div>
+
+        <div class="menu-heading">
+          <div>
+            <p class="eyebrow">SOMETHING FOR EVERY CRAVING</p>
+            <h2>Explore the menu</h2>
+          </div>
+          <label class="search">
+            <span aria-hidden="true">⌕</span>
+            <input id="menu-search" type="search" placeholder="Search meals..." autocomplete="off" />
+          </label>
+        </div>
+        <p class="menu-help">Choose a category or search, then tap <span aria-hidden="true">+</span> to add a favorite. Photo previews are representative; served dishes may look different.</p>
+        <nav class="categories" id="categories" aria-label="Menu categories"></nav>
+        <div class="product-grid" id="product-grid" aria-live="polite"></div>
+        <div class="menu-end-actions">
+          <button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top of menu">↑ Back to top</button>
+        </div>
+      </section>
+
+      <aside class="cart-panel" aria-labelledby="cart-title">
+        <div class="cart-sticky-content">
+          <div class="cart-title-row">
+            <div>
+              <p class="eyebrow">YOUR ORDER</p>
+              <h2 id="cart-title">Your basket <span class="cart-count" id="cart-count">0</span></h2>
+            </div>
+            <span class="bag-icon" aria-hidden="true">▱</span>
+          </div>
+          <div class="cart-items" id="cart-items" aria-live="polite"></div>
+          <div class="cart-bottom">
+            <div class="subtotal-row"><span>Subtotal</span><strong id="subtotal">₱0.00</strong></div>
+            <p class="tax-note">Taxes included where applicable</p>
+            <button class="checkout-button" id="checkout-button" type="button" disabled>
+              <span>Review your order</span><span id="checkout-total">₱0.00</span>
+            </button>
+            <p class="secure-note"><span aria-hidden="true">♡</span> No rush — your order is made fresh</p>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="site-footer">
+      <a href="reviews.html">Write your reviews here!</a>
+    </footer>
+
+    <!-- <p class="demo-notice">Prototype mode: orders and menu updates are saved only in this browser.</p> -->
+    <p class="storage-error" id="storage-error" role="alert" hidden></p>
+
+    <dialog class="confirmation" id="order-details">
+      <button class="dialog-close" id="order-details-close" type="button" aria-label="Close">×</button>
+      <p class="eyebrow">ORDER DETAILS</p>
+      <h2>What's your name?</h2>
+      <p class="order-details-help">Your name will appear on the receipt.</p>
+      <form class="order-details-form" id="order-details-form">
+        <label for="customer-name">Name</label>
+        <input id="customer-name" name="customerName" type="text" autocomplete="name" maxlength="80" required />
+        <button class="edit-order-button" id="edit-order" type="button">Edit order</button>
+        <button class="checkout-button" type="submit">Place order</button>
+      </form>
+      <section class="order-confirm-step" id="order-confirm-step" aria-labelledby="order-confirm-title" hidden>
+        <p class="eyebrow">CONFIRM ORDER</p>
+        <h2 id="order-confirm-title">Are you sure you want to place this order?</h2>
+        <p class="order-confirm-help">Please check your details. The canteen team will start preparing your order once you proceed.</p>
+        <div class="order-confirm-summary">
+          <p id="order-confirm-name"></p>
+          <p id="order-confirm-total"></p>
+        </div>
+        <p class="order-confirm-error" id="order-confirm-error" role="alert" hidden>Your basket is empty. Add an item before placing your order.</p>
+        <div class="order-confirm-actions">
+          <button class="edit-order-button" id="order-confirm-back" type="button">Go back and review</button>
+          <button class="checkout-button" id="confirm-place-order" type="button">Yes, place order</button>
+        </div>
+      </section>
+      <section class="order-final-step" id="order-final-step" aria-labelledby="order-final-title" hidden>
+        <p class="eyebrow">FINAL CONFIRMATION</p>
+        <h2 id="order-final-title">One last check</h2>
+        <p class="order-confirm-help">This will send your order to the canteen team to prepare. Do you want to continue?</p>
+        <div class="order-confirm-summary">
+          <p id="order-final-name"></p>
+          <p id="order-final-total"></p>
+        </div>
+        <p class="order-confirm-error" id="order-final-error" role="alert" hidden>Your basket is empty. Add an item before placing your order.</p>
+        <div class="order-confirm-actions">
+          <button class="edit-order-button" id="order-final-back" type="button">Go back</button>
+          <button class="checkout-button" id="final-place-order" type="button">Confirm and send order</button>
+        </div>
+      </section>
+    </dialog>
+
+    <dialog class="confirmation" id="confirmation">
+      <button class="dialog-close" id="dialog-close" type="button" aria-label="Close">×</button>
+      <div class="success-icon" aria-hidden="true">✓</div>
+      <p class="eyebrow">ORDER RECEIVED</p>
+      <h2>Your receipt</h2>
+      <p class="confirmation-message" id="confirmation-message">Show this receipt to the canteen team to complete your order.</p>
+      <div id="receipt" class="receipt"></div>
+      <button class="print-button" id="print-receipt" type="button">Print receipt</button>
+      <button class="checkout-button done-button" id="done-button" type="button">Start a new order</button>
+    </dialog>
+    <div class="dialog-backdrop" id="dialog-backdrop"></div>
+  </body>
+</html>

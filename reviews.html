@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1e3a8a" />
+    <title>Click2Eat — Reviews</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="accessibility.js" defer></script>
+    <script src="reviews.js" defer></script>
+  </head>
+  <body class="reviews-page">
+    <header class="topbar">
+      <div class="accessibility-widget">
+        <button class="accessibility-toggle" type="button" aria-label="Open accessibility options"
+          aria-controls="accessibility-panel" aria-expanded="false">
+          <img src="neust.webp" alt="" />
+        </button>
+      </div>
+      <a class="brand" href="index.html" aria-label="Click2Eat customer menu">
+        <span class="brand-logo-slot"><img src="neust.webp" alt="NEUST logo" /></span>
+        <span>Click2Eat<span class="brand-small">CUSTOMER REVIEWS</span></span>
+      </a>
+      <div class="topbar-note"><span class="open-dot"></span> Your feedback helps us serve you better</div>
+      <a class="admin-back-link" href="index.html">← Back to menu</a>
+    </header>
+
+    <main class="reviews-main">
+      <section class="admin-welcome">
+        <div>
+          <p class="eyebrow">CUSTOMER VOICE</p>
+          <h1>Reviews &amp; ratings</h1>
+          <p>Share how we did, or see what other customers thought.</p>
+        </div>
+        <div class="reviews-summary" aria-live="polite">
+          <strong id="average-rating">—</strong>
+          <span id="review-count">No reviews yet</span>
+        </div>
+      </section>
+
+      <p class="admin-storage-note">Reviews are saved in this browser and are not shared across devices.</p>
+      <p class="storage-error" id="reviews-storage-error" role="alert" hidden></p>
+
+      <section class="reviews-columns" aria-label="Submit and read reviews">
+        <form class="feedback-card review-form" id="review-form">
+          <div>
+            <p class="eyebrow">LEAVE A REVIEW</p>
+            <h2>How was your order?</h2>
+          </div>
+          <p id="review-eligibility" class="form-message" aria-live="polite"></p>
+          <label for="review-order">Completed order</label>
+          <select id="review-order" required></select>
+          <label for="review-rating">Your rating</label>
+          <select id="review-rating" required>
+            <option value="">Choose a rating</option>
+            <option value="5">★★★★★ — Loved it</option>
+            <option value="4">★★★★ — Really good</option>
+            <option value="3">★★★ — It was okay</option>
+            <option value="2">★★ — Could be better</option>
+            <option value="1">★ — Not for me</option>
+          </select>
+          <label for="review-comment">Comments (optional)</label>
+          <textarea id="review-comment" rows="4" maxlength="400" placeholder="Anything you'd like us to know?"></textarea>
+          <button class="checkout-button feedback-submit" type="submit">Send review</button>
+          <p id="review-message" class="form-message" aria-live="polite"></p>
+        </form>
+
+        <section class="reviews-list-section" aria-labelledby="reviews-list-title">
+          <div class="section-heading">
+            <div><p class="eyebrow">WHAT CUSTOMERS SAY</p><h2 id="reviews-list-title">Recent reviews</h2></div>
+          </div>
+          <div id="reviews-list" class="reviews-list" aria-live="polite"></div>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
